@@ -5,17 +5,14 @@ import 'pages/home_pages.dart';
 import 'services/firestore.dart';
 
 void main() async {
-  // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase with verbose error handling
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
     debugPrint('Firebase initialized successfully');
     
-    // Test Firestore connection
     final firestoreService = FirestoreService();
     await firestoreService.testConnection();
     

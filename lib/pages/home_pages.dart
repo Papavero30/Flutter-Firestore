@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Test Firebase connection on startup
     _testFirebaseConnection();
   }
 
@@ -38,7 +37,6 @@ class _HomePageState extends State<HomePage> {
     _currentNoteId = null;
   }
 
-  // Show dialog to add or edit a note
   void _showNoteDialog({DocumentSnapshot? document}) {
     if (document != null) {
       final data = document.data() as Map<String, dynamic>;
@@ -46,7 +44,6 @@ class _HomePageState extends State<HomePage> {
       _contentController.text = data['content'] ?? '';
       _currentNoteId = document.id;
     } else {
-      // Clear controllers when adding a new note
       _clearControllers();
     }
 
@@ -94,7 +91,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Extracted method to save a note
   Future<void> _saveNote(BuildContext context) async {
     if (_titleController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -103,14 +99,12 @@ class _HomePageState extends State<HomePage> {
       return;
     }
     
-    // Close the dialog immediately
     Navigator.pop(context);
     
     setState(() => _isLoading = true);
     
     try {
       if (_currentNoteId == null) {
-        // Add new note
         await _firestoreService.addNote(
           title: _titleController.text,
           content: _contentController.text,
@@ -121,7 +115,6 @@ class _HomePageState extends State<HomePage> {
           );
         }
       } else {
-        // Update existing note
         await _firestoreService.updateNote(
           docId: _currentNoteId!,
           title: _titleController.text,
@@ -147,7 +140,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // Delete note directly without confirmation dialog
   void _deleteNote(String docId) async {
     setState(() => _isLoading = true);
     

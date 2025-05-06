@@ -2,37 +2,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 class FirestoreService {
-  // Using Firestore Database for CRUD operations
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final CollectionReference notesCollection = 
       FirebaseFirestore.instance.collection('notes');
 
-  // Create
   Future<String> addNote({required String title, required String content}) async {
     try {
-      // Print for debugging
       debugPrint('Adding note: Title: $title, Content: $content');
       
-      // Add document with timestamp
       final data = {
         'title': title,
         'content': content,
-        'timestamp': FieldValue.serverTimestamp(), // Use server timestamp
+        'timestamp': FieldValue.serverTimestamp(), 
       };
       
       DocumentReference docRef = await notesCollection.add(data);
       
-      // Confirm data was added
       debugPrint('Note added with ID: ${docRef.id}');
       return docRef.id;
     } catch (e) {
-      // Better error logging
       debugPrint('Error adding note: $e');
       throw Exception('Failed to add note: $e');
     }
   }
 
-  // Read
   Stream<QuerySnapshot> getNotes() {
     try {
       debugPrint('Getting notes stream from Firestore');
@@ -45,7 +38,6 @@ class FirestoreService {
     }
   }
 
-  // Update
   Future<void> updateNote({
     required String docId, 
     required String title, 
@@ -67,7 +59,6 @@ class FirestoreService {
     }
   }
 
-  // Delete
   Future<void> deleteNote(String docId) async {
     try {
       debugPrint('Deleting note with ID: $docId');
@@ -79,7 +70,6 @@ class FirestoreService {
     }
   }
   
-  // Test connection to Firestore
   Future<bool> testConnection() async {
     try {
       final testDoc = await _firestore.collection('_test_connection').add({
