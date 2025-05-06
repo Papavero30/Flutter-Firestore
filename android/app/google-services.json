@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "810628528302",
+    "firebase_url": "https://learning-by-googling-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "learning-by-googling",
+    "storage_bucket": "learning-by-googling.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810628528302:android:1638e4e0e626acb0bb553f",
+        "android_client_info": {
+          "package_name": "com.example.firebase_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd_RthmyBXVYjPDogXX73cBGN9ed4Fdkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
